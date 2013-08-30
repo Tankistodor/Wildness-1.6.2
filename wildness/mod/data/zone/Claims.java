@@ -16,13 +16,14 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Claims {
-    protected String owner;
-    protected List<String> peoples;
+    
     protected int x;
     protected int z;
     protected int dim;
-    protected String Messages;
     
+    protected String owner;
+    protected List<String> peoples;
+    protected String Messages;
     protected boolean trespass;
     protected boolean vandalism;
     
@@ -74,7 +75,7 @@ public class Claims {
      */
     public Claims(int dim, String name, double x, double y, double z, boolean tres, boolean vand) {
     	this(dim, name, MathHelper.floor_double(x), MathHelper.floor_double(z), tres, vand);
-    	System.out.println("X: "+ x + " Z:" + z);
+    	System.out.println("Claims chunk coord double X: "+ x + " Z:" + z);
     }
 
     /**

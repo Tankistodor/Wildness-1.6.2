@@ -28,4 +28,15 @@ public class ClaimStorage {
     	serverClimeDB.put(makeHash(dim,x,z), new Claims(dim,owner,x,z,trespass,vandalism, peoples));
     }
 
+    
+    public static ClaimOwners addClaimOwner(String owner, String messages, List<String> peoples, boolean trespass, boolean vandalism) {
+    	ClaimOwners ca;
+    	if (serverClimeUsers.containsKey(owner)) {
+    		ca = (ClaimOwners) serverClimeUsers.get(owner);
+    	} else {
+    		ca = new ClaimOwners(owner, peoples, "message", trespass, vandalism);
+    		serverClimeUsers.put(owner, ca);
+    	}
+		return ca;
+    }
 }
