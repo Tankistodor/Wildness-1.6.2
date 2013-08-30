@@ -17,10 +17,15 @@ public class ClaimStorage {
     
     public static HashMap clientClimeDB = new HashMap();
     public static HashMap serverClimeDB = new HashMap();
+    public static HashMap serverClimeUsers = new HashMap();
     
-    public static String makeHash(int x, int y) {
-    	return x+","+y;
+    public static String makeHash(int dim, int x, int z) {
+    	return "" + dim + "," + x + "," + z;
     }
     
+    
+    public void createClaim(int dim, int x, int z, String owner, boolean trespass, boolean vandalism, List<String> peoples){
+    	serverClimeDB.put(makeHash(dim,x,z), new Claims(dim,owner,x,z,trespass,vandalism, peoples));
+    }
 
 }

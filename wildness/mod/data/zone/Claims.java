@@ -5,6 +5,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,12 +17,15 @@ import java.util.List;
  */
 public class Claims {
     protected String owner;
-    //protected List<String> peoples;
+    protected List<String> peoples;
     protected int x;
     protected int z;
     protected int dim;
     protected String Messages;
-    protected long ownerLastVisitDate;
+    
+    protected boolean trespass;
+    protected boolean vandalism;
+    
 
     /** Create Claim from CHUNK coordinates 
      * 
@@ -29,13 +33,36 @@ public class Claims {
      * @param x
      * @param z
      */
-    public Claims(int dim, String name, int x, int z) {
+    public Claims(int dim, String name, int x, int z, boolean tres, boolean vand) {
     	this.dim = dim;
         this.x = x;
         this.z = z;
+        this.trespass = tres;
+        this.vandalism = vand;
         this.owner = name;
         this.Messages = "as";
-        this.ownerLastVisitDate = 0l;
+        this.peoples = new ArrayList<String>();
+    }
+    
+    /** Create Claim from CHUNK coordinates and add user perms
+     * 
+     * @param dim
+     * @param name
+     * @param x
+     * @param z
+     * @param tres
+     * @param vand
+     * @param peoples
+     */
+    public Claims(int dim, String name, int x, int z, boolean tres, boolean vand, List<String> peoples) {
+    	this.dim = dim;
+        this.x = x;
+        this.z = z;
+        this.trespass = tres;
+        this.vandalism = vand;
+        this.owner = name;
+        this.Messages = "as";
+        this.peoples = peoples;
     }
     
     /**
@@ -45,8 +72,8 @@ public class Claims {
      * @param y
      * @param z
      */
-    public Claims(int dim, String name, double x, double y, double z) {
-    	this(dim, name, MathHelper.floor_double(x), MathHelper.floor_double(z));
+    public Claims(int dim, String name, double x, double y, double z, boolean tres, boolean vand) {
+    	this(dim, name, MathHelper.floor_double(x), MathHelper.floor_double(z), tres, vand);
     	System.out.println("X: "+ x + " Z:" + z);
     }
 
@@ -57,8 +84,8 @@ public class Claims {
      * @param y
      * @param z
      */
-    public Claims(int dim, String name, int x, int y, int z) {
-    	this(dim, name, x>>4, z>>4);  
+    public Claims(int dim, String name, int x, int y, int z, boolean tres, boolean vand) {
+    	this(dim, name, x>>4, z>>4, tres, vand);  
     	System.out.println("Claims(block) chunk coord floor X: "+ (x>>4) + " Z:" + (z>>4));
     }
     
@@ -90,4 +117,27 @@ public class Claims {
 		return this.owner;
 	}
     
+	public boolean getTresPass() {
+		return this.trespass;
+	}
+	
+	public boolean getVandalism() {
+		return this.vandalism;
+	}
+	
+	public void addPersone(String name) {
+		this.peoples.add(name);
+	}
+	
+	public void removePerson(String name) {
+		this.peoples.remove(name);
+	}
+	
+	public boolean isTresPass(String name) {
+		return ((this.peoples.contains(name)&&this.trespass)||(name.equals(this.owner)));
+	}
+	
+	public boolean isVandalism(String name) {
+		return ((this.peoples.contains(name)&&this.vandalism)||(name.equals(this.owner)));
+	}
 }

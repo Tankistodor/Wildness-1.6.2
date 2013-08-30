@@ -47,7 +47,11 @@ public class NetworkManager implements IPacketHandler {
 					
 					if (WildnessMod.ZoneDB.serverClimeDB.containsKey(dim+","+x+","+z)) {
 						Claims c = (Claims) WildnessMod.ZoneDB.serverClimeDB.get(dim+","+x+","+z);
-						sendClaimState(player, dim, x,z,c.getOwner());
+						boolean tres = c.getTresPass();
+						boolean vand = c.getVandalism();
+						if (c.isTresPass(e.username)) tres = true; else tres = false;
+						if (c.isVandalism(e.username)) vand = true; else vand = false;
+						sendClaimState(player, dim, x,z,c.getOwner(),tres, vand);
 						}
 				} catch (IOException var17) {
 					;
@@ -60,7 +64,7 @@ public class NetworkManager implements IPacketHandler {
 	}
 
 	
-	public void sendClaimState(Player player, int dim, int x, int z, String s) {
+	public void sendClaimState(Player player, int dim, int x, int z, String s,boolean trespass, boolean vandalism) {
 		try {
 		      ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		      DataOutputStream os = new DataOutputStream(buffer);
@@ -71,6 +75,8 @@ public class NetworkManager implements IPacketHandler {
 		      os.writeInt(x);
 		      os.writeInt(z);
 		      os.writeUTF(s);
+		      os.writeBoolean(trespass);
+		      os.writeBoolean(vandalism);
 
 		      os.close();
 

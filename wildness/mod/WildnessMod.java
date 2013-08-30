@@ -3,6 +3,8 @@ package wildness.mod;
 
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import api.player.client.ClientPlayerAPI;
 import api.player.server.ServerPlayerAPI;
@@ -139,12 +141,13 @@ public class WildnessMod {
     	//Block.grass.setBlockUnbreakable();
     	//Block.dirt.setBlockUnbreakable();
     	//Block.dirt.setHardness(60f);
-    	Item.itemsList[Block.dirt.blockID].setMaxStackSize(3);
-    	//ZoneDB.climeDB.add(new Claims("TestClaim",-74,6));
-    	//ZoneDB.climeDB.add(new Claims("TestClaim",-73,27));
     	
-    	ZoneDB.serverClimeDB.put("0,-74,6", new Claims(0,"TestClaim",-74,6));
-    	ZoneDB.serverClimeDB.put("0,-73,27", new Claims(0,"TestClaim",-73,27));
+    	Item.itemsList[Block.dirt.blockID].setMaxStackSize(3);
+
+    	List a = new ArrayList<String>();
+    	a.add("Tankistodor");
+    	ZoneDB.createClaim(0, -74, 29, "Tankistodor2", true, false,a);
+    	ZoneDB.createClaim(0, -74, 28, "Tankistodor2", true, false,new ArrayList<String>());
     }
     
     @EventHandler

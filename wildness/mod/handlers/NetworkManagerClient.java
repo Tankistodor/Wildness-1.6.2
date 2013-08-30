@@ -80,15 +80,15 @@ public class NetworkManagerClient extends NetworkManager {
             }
             
             if ((type1 == 101) && (world.isRemote)) {
-				// Client reviced packet chunk state from server
+				// Client received claim data state packet from server 
 				try {
 					int dim = dis.readInt();
 					int x = dis.readInt();
 					int z = dis.readInt();
-					String name = dis.readUTF();
-					System.out.println("I`m client, and i`m pong packet from server " + x
-							+ " " + z);
-					WildnessMod.ZoneDB.clientClimeDB.put(dim+","+x+","+z, new Claims(dim,name,x,z));
+					String owner = dis.readUTF();
+					boolean trespass = dis.readBoolean();
+					boolean vandalism = dis.readBoolean();
+					WildnessMod.ZoneDB.clientClimeDB.put(dim+","+x+","+z, new Claims(dim,owner,x,z, trespass, vandalism));
 				} catch (IOException var17) {
 					;
 				}

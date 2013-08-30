@@ -46,9 +46,9 @@ public class BlockClaim extends Block {
     		EntityPlayer p = (EntityPlayer) entityliving;
     		if (world.isRemote)
             {
-    			WildnessMod.ZoneDB.clientClimeDB.put(world.provider.dimensionId+","+i+","+k,new Claims(world.provider.dimensionId,p.username,i,j,k));
+    			WildnessMod.ZoneDB.clientClimeDB.put(world.provider.dimensionId+","+i+","+k,new Claims(world.provider.dimensionId,p.username,i,j,k,false,false));
             } else {
-            	WildnessMod.ZoneDB.clientClimeDB.put(world.provider.dimensionId+","+i+","+k,new Claims(world.provider.dimensionId,p.username,i,j,k));
+            	WildnessMod.ZoneDB.clientClimeDB.put(world.provider.dimensionId+","+i+","+k,new Claims(world.provider.dimensionId,p.username,i,j,k,false,false));
             }
     	}
     	

@@ -68,7 +68,9 @@ public class WClientPlayerBase  extends ClientPlayerBase {
     	for (Object ss : WildnessMod.ZoneDB.clientClimeDB.keySet()) {
     		Claims c = (Claims) WildnessMod.ZoneDB.clientClimeDB.get(ss);
     		if (c.checkInChunk(player.worldObj.provider.dimensionId,player.username,x+player.posX, y, z+player.posZ)) {
-        		xx = 0; zz = 0;
+    			if (!c.getTresPass()) {
+    				xx = 0; zz = 0;
+    			}
         	}
     	}
     	/*Iterator it=WildnessMod.ZoneDB.clientClimeDB.entrySet().iterator();
