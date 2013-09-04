@@ -1,7 +1,7 @@
 package wildness.mod.blocks;
 
 import wildness.mod.WildnessMod;
-import wildness.mod.data.zone.Claims;
+import wildness.mod.data.zone.ClaimOwners;
 import wildness.mod.tileentity.TEClaim;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -46,9 +46,11 @@ public class BlockClaim extends Block {
     		EntityPlayer p = (EntityPlayer) entityliving;
     		if (world.isRemote)
             {
-    			WildnessMod.ZoneDB.clientClimeDB.put(world.provider.dimensionId+","+i+","+k,new Claims(world.provider.dimensionId,p.username,i,j,k,false,false));
+    			//WildnessMod.ZoneDB.clientClimeDB.put(world.provider.dimensionId+","+i+","+k,new Claims(world.provider.dimensionId,p.username,i,j,k,false,false));
             } else {
-            	WildnessMod.ZoneDB.clientClimeDB.put(world.provider.dimensionId+","+i+","+k,new Claims(world.provider.dimensionId,p.username,i,j,k,false,false));
+            	//ClaimOwners ca = new addClaimOwner(p.username,"");
+            	WildnessMod.ZoneDB.addPlotToClaimBlockCoord(WildnessMod.ZoneDB.addClaimOwner(p.username,""),world.provider.dimensionId, i, j);
+            	//serverClimeDB.put(world.provider.dimensionId+","+i+","+k,new Claims(world.provider.dimensionId,p.username,i,j,k,false,false));
             }
     	}
     	

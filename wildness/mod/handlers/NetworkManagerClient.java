@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import wildness.mod.WildnessMod;
 import wildness.mod.core.WildnessTime;
-import wildness.mod.data.zone.Claims;
+import wildness.mod.data.zone.ClaimPlotClient;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
@@ -88,7 +88,7 @@ public class NetworkManagerClient extends NetworkManager {
 					String owner = dis.readUTF();
 					boolean trespass = dis.readBoolean();
 					boolean vandalism = dis.readBoolean();
-					WildnessMod.ZoneDB.clientClimeDB.put(dim+","+x+","+z, new Claims(dim,owner,x,z, trespass, vandalism));
+					WildnessMod.ZoneDB.clientClimeDB.put(dim+","+x+","+z, new ClaimPlotClient(dim,owner,x,z, trespass, vandalism));
 				} catch (IOException var17) {
 					;
 				}

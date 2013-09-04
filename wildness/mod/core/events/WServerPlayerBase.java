@@ -23,7 +23,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ReportedException;
 import wildness.mod.WildnessMod;
 import wildness.mod.WildnessSettings;
-import wildness.mod.data.zone.Claims;
+import wildness.mod.data.zone.ClaimPlot;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -72,23 +72,15 @@ public class WServerPlayerBase extends ServerPlayerBase {
         if ((x != 0)||(y != 0)||(z != 0)) {
 
             boolean flg = false;
-            //Iterator it=WildnessMod.ZoneDB.serverClimeDB.entrySet().iterator();
-            //while(it.hasNext())
-            //{
-            	//Claims c = (Claims)it.next();
-            
             for (Object ss : WildnessMod.ZoneDB.serverClimeDB.keySet()) {
-        		Claims c = (Claims) WildnessMod.ZoneDB.serverClimeDB.get(ss);
+            	ClaimPlot c = (ClaimPlot) WildnessMod.ZoneDB.serverClimeDB.get(ss);
             	
             	if (c.checkInChunk(player.worldObj.provider.dimensionId,player.username,x+player.posX, y, z+player.posZ))
-                    flg = true;
+            		if (!c.isTresPass(player.username)) {
+            			player.setPosition(player.lastTickPosX, player.lastTickPosX, player.lastTickPosX);
+                        super.beforeMoveEntity(0, 0, 0);    
+            		}
             	}
-            //}
-            
-            if (flg) {
-                player.setPosition(player.lastTickPosX, player.lastTickPosX, player.lastTickPosX);
-                super.beforeMoveEntity(0, 0, 0);
-            }
         }
         super.beforeMoveEntity(x, y, z);
     }

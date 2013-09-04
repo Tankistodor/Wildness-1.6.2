@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import wildness.mod.WildnessMod;
 import wildness.mod.core.WildnessTime;
-import wildness.mod.data.zone.Claims;
+import wildness.mod.data.zone.ClaimPlot;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -46,11 +46,11 @@ public class NetworkManager implements IPacketHandler {
 					int z = dis.readInt();
 					
 					if (WildnessMod.ZoneDB.serverClimeDB.containsKey(dim+","+x+","+z)) {
-						Claims c = (Claims) WildnessMod.ZoneDB.serverClimeDB.get(dim+","+x+","+z);
+						ClaimPlot c = (ClaimPlot) WildnessMod.ZoneDB.serverClimeDB.get(dim+","+x+","+z);
 						boolean tres = c.getTresPass();
 						boolean vand = c.getVandalism();
-						if (c.isTresPass(e.username)) tres = true; else tres = false;
-						if (c.isVandalism(e.username)) vand = true; else vand = false;
+						if (c.isTresPass(e.username)) tres = true;
+						if (c.isVandalism(e.username)) vand = true;;
 						sendClaimState(player, dim, x,z,c.getOwner(),tres, vand);
 						}
 				} catch (IOException var17) {

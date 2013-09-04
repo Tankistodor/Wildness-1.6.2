@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import wildness.mod.WildnessMod;
-import wildness.mod.data.zone.Claims;
+import wildness.mod.data.zone.ClaimPlotClient;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,7 +50,7 @@ public class ClientState {
 
             //addVertex3d(51,9);
             for (Object ss : WildnessMod.ZoneDB.clientClimeDB.keySet()) {
-        		Claims c = (Claims) WildnessMod.ZoneDB.clientClimeDB.get(ss);
+        		ClaimPlotClient c = (ClaimPlotClient) WildnessMod.ZoneDB.clientClimeDB.get(ss);
             	addVertex3d(c.getX(), c.getZ(),y);
             }
 
@@ -72,8 +72,13 @@ public class ClientState {
     	double lowH = h-cHeight-cHeight;
     	double hiH = h+cHeight;
     	
+    	lowH = h-1;
+    	hiH = h;
+    	
     	double l = 0.1d;
     	
+    	//QUAD []
+    	/*
     	GL11.glBegin(GL11.GL_QUAD_STRIP);
         GL11.glVertex3d(x*16+l,lowH,z*16+l);
         GL11.glVertex3d(x*16+l,hiH,z*16+l);
@@ -90,7 +95,32 @@ public class ClientState {
         GL11.glVertex3d(x*16+l,lowH,z*16+l);
         GL11.glVertex3d(x*16+l,hiH,z*16+l);
         GL11.glEnd();
+    	*/
     	
+    	GL11.glBegin(GL11.GL_TRIANGLES);
+        GL11.glVertex3d(x*16+l,lowH,z*16+l);
+        GL11.glVertex3d((x+1)*16-l,lowH,z*16+l);
+        GL11.glVertex3d((x+1)*16-l-8,hiH,z*16+l);
+        GL11.glEnd();
+
+    	GL11.glBegin(GL11.GL_TRIANGLES);
+        GL11.glVertex3d((x*16)+l,lowH,(z+1)*16-l);
+        GL11.glVertex3d((x+1)*16-l,lowH,(z+1)*16-l);
+        GL11.glVertex3d((x+1)*16-l-8,hiH,(z+1)*16-l);
+        GL11.glEnd();
+        
+        GL11.glBegin(GL11.GL_TRIANGLES);
+        GL11.glVertex3d((x*16)+l,lowH,(z)*16+l);
+        GL11.glVertex3d((x)*16+l,lowH,(z+1)*16-l);
+        GL11.glVertex3d((x)*16+l,hiH,(z+1)*16-l-8);
+        GL11.glEnd();
+        
+        GL11.glBegin(GL11.GL_TRIANGLES);
+        GL11.glVertex3d((x+1)*16-l,lowH,(z)*16+l);
+        GL11.glVertex3d((x+1)*16-l,lowH,(z+1)*16-l);
+        GL11.glVertex3d((x+1)*16-l,hiH,(z+1)*16-l-8);
+        GL11.glEnd();
+        
     }
     
     @SideOnly(Side.CLIENT)

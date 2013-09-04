@@ -33,8 +33,9 @@ import wildness.mod.blocks.WildnessBlocks;
 import wildness.mod.core.events.ClientState;
 import wildness.mod.core.events.WClientPlayerBase;
 import wildness.mod.core.events.WServerPlayerBase;
+import wildness.mod.data.zone.ClaimOwners;
 import wildness.mod.data.zone.ClaimStorage;
-import wildness.mod.data.zone.Claims;
+import wildness.mod.data.zone.ClaimPlot;
 import wildness.mod.handlers.ClientTickHandler;
 import wildness.mod.handlers.ForgeEventsHandler;
 import wildness.mod.handlers.NetworkManager;
@@ -122,6 +123,12 @@ public class WildnessMod {
     	NetworkRegistry.instance().registerGuiHandler(this, proxy);
     	//NetworkRegistry.instance().registerConnectionHandler(new PacketHandler());
     	proxy.setupGuiIngameForge();
+    	
+		/*if (evt.getSide().isClient()) {
+	        ClientPlayerAPI.register("WildnessMod",WClientPlayerBase.class); } else {
+	        ServerPlayerAPI.register("WildnessMod",WServerPlayerBase.class); }*/
+    	
+    	
     }
     
     @EventHandler
@@ -129,9 +136,8 @@ public class WildnessMod {
 
 	@EventHandler
     public void load(FMLInitializationEvent event) {
-		if (event.getSide().isClient()) {
-        ClientPlayerAPI.register("WildnessMod",WClientPlayerBase.class); } else {
-        ServerPlayerAPI.register("WildnessMod",WServerPlayerBase.class); }
+        ClientPlayerAPI.register("WildnessMod",WClientPlayerBase.class);
+        ServerPlayerAPI.register("WildnessMod",WServerPlayerBase.class);
     }
 
     @EventHandler
@@ -146,8 +152,13 @@ public class WildnessMod {
 
     	List a = new ArrayList<String>();
     	a.add("Tankistodor");
-    	ZoneDB.createClaim(0, -74, 29, "Tankistodor2", true, false,a);
-    	ZoneDB.createClaim(0, -74, 28, "Tankistodor2", true, false,new ArrayList<String>());
+    	//ZoneDB.createClaim(0, -74, 29, "Tankistodor2", true, false,a);
+    	//ZoneDB.createClaim(0, -74, 28, "Tankistodor2", true, false,new ArrayList<String>());
+    	
+    		ClaimOwners cam = ZoneDB.addClaimOwner("2Tankistodor", "messages");
+    		ZoneDB.addPlotToClaim(cam,0,-72,29);
+    		ZoneDB.addPlotToClaim(cam,0,-72,30);
+    	
     }
     
     @EventHandler

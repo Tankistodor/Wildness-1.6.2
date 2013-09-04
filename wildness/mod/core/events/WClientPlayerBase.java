@@ -11,7 +11,7 @@ import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.MathHelper;
 import wildness.mod.WildnessMod;
 import wildness.mod.WildnessSettings;
-import wildness.mod.data.zone.Claims;
+import wildness.mod.data.zone.ClaimPlotClient;;
 
 /**
  * Created with IntelliJ IDEA.
@@ -52,7 +52,6 @@ public class WClientPlayerBase  extends ClientPlayerBase {
         }
     }
     
-    
     /*
     public void moveEntityWithHeading(float var1, float var2){
     	player.sendChatToPlayer(new ChatMessageComponent().func_111079_a("v1:"+var1+" v2: "+var2));
@@ -66,22 +65,13 @@ public class WClientPlayerBase  extends ClientPlayerBase {
     	double zz = z;
     	
     	for (Object ss : WildnessMod.ZoneDB.clientClimeDB.keySet()) {
-    		Claims c = (Claims) WildnessMod.ZoneDB.clientClimeDB.get(ss);
+    		ClaimPlotClient c = (ClaimPlotClient) WildnessMod.ZoneDB.clientClimeDB.get(ss);
     		if (c.checkInChunk(player.worldObj.provider.dimensionId,player.username,x+player.posX, y, z+player.posZ)) {
     			if (!c.getTresPass()) {
     				xx = 0; zz = 0;
     			}
         	}
     	}
-    	/*Iterator it=WildnessMod.ZoneDB.clientClimeDB.entrySet().iterator();
-        while(it.hasNext())
-        {
-        	Claims c = (Claims)it.next();
-        	if (c.checkInChunk(player.worldObj.provider.dimensionId,player.username,x+player.posX, y, z+player.posZ)) {
-        		xx = 0; zz = 0;
-        	}
-
-        }*/
     	super.moveEntity(xx,yy,zz);
     }
     

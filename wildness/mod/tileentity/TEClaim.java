@@ -7,14 +7,17 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TEClaim extends TileEntity implements IInventory {
 	
-	private ItemStack[] dispenserContents = new ItemStack[9];
+	// 0 - TRESSPASS
+	// 1 - VANDAL
+	// 2-10 - Cards
+	private ItemStack[] dispenserContents = new ItemStack[11];
 	protected String customName;
 	protected String owner;
 
 	@Override
 	public int getSizeInventory() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 11;
 	}
 
 	@Override
